@@ -12,7 +12,7 @@
 
 <h2>CD Test Build</h2>
 
-[![CD](https://img.shields.io/github/actions/workflow/status/FontysVenlo/esd-workshop-ci-cd_esde_jannes_elias/CD.yml?branch=main)](https://github.com/janneshatzius/ESDE_WORKSHOP_TASK_CICD/actions/workflows/CD.yml)
+[![CD](https://img.shields.io/github/actions/workflow/status/janneshatzius/ESDE_WORKSHOP_TASK_CICD/CD.yml?branch=main)](https://github.com/janneshatzius/ESDE_WORKSHOP_TASK_CICD/actions/workflows/CD.yml)
 <br>
 
 <h2>Coverage of Tests</h2>
