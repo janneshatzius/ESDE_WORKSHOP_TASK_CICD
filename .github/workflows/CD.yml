@@ -1,0 +1,79 @@
+name: CD (Docker & Pages)
+
+on:
+  workflow_run:
+    workflows: ["CI (Build & Test)"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: cd-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+ 
+
+jobs:
+  docker:
+    name: Docker Skeleton
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout CI commit (or current on manual run)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Setup Buildx (required later)
+        uses: docker/setup-buildx-action@v3
+
+      # ------------------ STUDENT TODOS ------------------
+      # TODO-1: Login to registry (Docker Hub or GHCR)
+
+
+      # TODO-2: Build & push image
+
+
+      # TODO-3 (optional): Test container runs
+
+
+      - name: Placeholder
+        run: echo "Docker CD TODOs go here (login, build, push, and test)."
+      # ---------------------------------------------------
+
+  pages:
+    name: Pages Skeleton
+    needs: docker
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout CI commit (or current on manual run)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Setup Gradle (cache)
+        uses: gradle/actions/setup-gradle@v4
+
+      # ------------------ STUDENT TODOS ------------------
+      # TODO-1: Run tests to produce JaCoCo XML
+
+
+      # TODO-2: Generate minimal Pages files (docs/)
+
+
+      # TODO-3: Configure & deploy GitHub Pages
+
+
+      - name: Placeholder
+        run: echo "Pages deployment TODOs go here (tests, exportPagesData, upload, deploy)."
+      # ---------------------------------------------------
+
